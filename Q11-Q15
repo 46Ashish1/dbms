@@ -1,0 +1,41 @@
+11. display the Name, Salary and Commission for all the employees who earn commission
+SOLUTION
+
+SELECT Ename, Salary, Commission
+FROM EMPLOYEE
+WHERE Commission IS NOT NULL;
+
+
+12.Sort the data in descending order of Salary and Commission
+SOLUTION
+
+SELECT Ename, Salary, Commission
+FROM EMPLOYEE
+WHERE Commission IS NOT NULL
+ORDER BY Salary DESC, Commission DESC;
+
+
+13.Name of all the employees where the third letter of their name is ‘A’.
+SOLUTION
+
+SELECT Ename
+FROM EMPLOYEE
+WHERE SUBSTRING(Ename, 3, 1) = 'A';
+
+
+14.two ‘R’s or have two ‘A’s in their
+name and are either in Dept No = 30 or their Manger’s Employee No = 7788.
+SOLUTION
+
+SELECT Ename
+FROM EMPLOYEE
+WHERE (Ename LIKE '%RR%' OR Ename LIKE '%AA%')
+AND (Dno = 30 OR SupervisonENO = '7788');
+
+
+15. whose Commission amount is greater than their Salary increased by 5%.
+SOLUTION
+
+SELECT Ename, Salary, Commission
+FROM EMPLOYEE
+WHERE Commission > (Salary * 1.05);
