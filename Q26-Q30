@@ -1,0 +1,45 @@
+26.display Name and Employee no. Along with their supervisor’s Name and the
+supervisor’s employee no; along with the Employees’ Name who do not have a supervisor.
+SOLUTION
+
+SELECT e1.Ename AS Employee_Name, e1.Eno AS Employee_No, e2.Ename AS Supervisor_Name, e2.Eno AS Supervisor_No
+FROM Employee e1
+LEFT JOIN Employee e2
+ON e1.SupervisonENO = e2.Eno
+UNION
+SELECT Ename AS Employee_Name, Eno AS Employee_No, NULL AS Supervisor_Name, NULL AS Supervisor_No
+FROM Employee
+WHERE SupervisonENO IS NULL;
+
+27.display Name, Dept No. And Salary of any employee whose department No.
+and salary matches both the department no. And the salary of any employee who earns a
+commission
+SOLUTION
+
+SELECT e1.Ename AS EmployeeName, e1.Dno AS DepartmentNo, e1.Salary
+FROM Employee AS e1
+WHERE e1.Dno = (
+  SELECT e2.Dno 
+  FROM Employee AS e2 
+  WHERE e2.Commission IS NOT NULL AND e2.Salary = e1.Salary
+);
+
+28.display Name and Salaries represented by asterisks, where each asterisk (*)
+signifies $100.
+SOLUTION
+
+SELECT EName AS Name, RPAD('*', Salary/100, '*') AS Salaries
+FROM Employee;
+
+29.display the Highest, Lowest, Sum and Average Salaries of all the employees
+SOLUTION
+
+SELECT MAX(Salary) AS HighestSalary, MIN(Salary) AS LowestSalary, SUM(Salary) AS TotalSalary, AVG(Salary) AS AverageSalary
+FROM Employee;
+
+30.display the number of employees performing the same Job type functions.
+SOLUTION
+
+SELECT Job, COUNT(*) AS Number_of_Employees
+FROM Employee
+GROUP BY Job;
