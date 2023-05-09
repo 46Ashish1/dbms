@@ -1,0 +1,20 @@
+41.find the employee’ name who is not supervisor and name of supervisor supervising more than 5 employees.
+SOLUTION
+
+SELECT emp1.ename AS "Employee Name", emp2.ename AS "Supervisor Name"
+FROM emp emp1, emp emp2
+WHERE emp1.mgr = emp2.empno
+AND emp1.empno NOT IN (SELECT mgr FROM emp WHERE mgr IS NOT NULL)
+GROUP BY emp1.ename, emp2.ename
+HAVING COUNT(*) > 5;
+
+42.display the job type with maximum and minimum employees
+SOLUTION
+
+SELECT job, COUNT(*) as count
+FROM employees
+GROUP BY job
+HAVING count = (SELECT MAX(emp_count) FROM 
+                (SELECT COUNT(*) as emp_count FROM employees GROUP BY job) max_count) 
+   OR count = (SELECT MIN(emp_count) FROM 
+               (SELECT COUNT(*) as emp_count FROM employees GROUP BY job) min_count);
