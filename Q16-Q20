@@ -1,0 +1,37 @@
+16.display the Current Date along with the day name.
+SOLUTION
+
+SELECT CONCAT(DATE_FORMAT(NOW(), '%W, %M %d, %Y'), '') AS CurrentDate;
+
+17.display Name, Hire Date and Salary Review Date which is the 1st Monday after
+six months of employment.
+SOLUTION
+
+SELECT Ename, Hire_date, DATE_ADD(DATE_ADD(DATE_FORMAT(Hire_date, '%Y-%m-01'), INTERVAL 6 MONTH), INTERVAL (8 - DAYOFWEEK(DATE_ADD(DATE_FORMAT(Hire_date, '%Y-%m-01'), INTERVAL 6 MONTH))) DAY) AS SalaryReviewDate
+FROM EMPLOYEE;
+
+18.display Name and calculate the number of months between today and the date
+on which employee was hired of department ‘Purchase’.
+SOLUTION
+
+SELECT Ename, TIMESTAMPDIFF(MONTH, Hire_date, NOW()) AS MonthsSinceHire
+FROM EMPLOYEE
+JOIN DEPARTMENT
+ON EMPLOYEE.Dno = DEPARTMENT.Dno
+WHERE Dname = 'Purchase';
+
+19.<E-Name> earns < Salary> monthly
+but wants < 3 * Current Salary >. Label the Column as Dream Salary.
+SOLUTION
+
+SELECT Ename, Salary, (Salary * 3) AS 'Dream Salary'
+FROM EMPLOYEE;
+
+
+20.Name with the 1st letter capitalized and all other letter lower case and
+length of their name of all the employees whose name starts with ‘J’, ’A’ and ‘M’.
+SOLUTION
+
+SELECT CONCAT(UCASE(LEFT(Ename, 1)), LCASE(SUBSTRING(Ename, 2))) AS 'Name', LENGTH(Ename) AS 'Name Length'
+FROM EMPLOYEE
+WHERE Ename LIKE 'J%' OR Ename LIKE 'A%' OR Ename LIKE 'M%';
