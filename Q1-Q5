@@ -1,0 +1,38 @@
+1.display Employee Name, Job, Hire Date, Employee Number; for each employee 
+with the Employee Number appearing first.
+SOLUTION
+
+
+SELECT Eno, Ename, Job_type, Hire_date
+FROM EMPLOYEE
+ORDER BY Eno ASC;
+
+
+2.unique Jobs from the Employee Table.
+SOLUTION
+
+SELECT DISTINCT Job_type
+FROM EMPLOYEE;
+
+
+3.Employee Name concatenated by a Job separated by a comma.
+SOLUTION
+
+SELECT CONCAT(Ename, ', ', Job_type) AS Employee_and_Job
+FROM EMPLOYEE;
+
+
+4.name the said column as THE_OUTPUT.
+SOLUTION
+
+SELECT CONCAT(Eno, ', ', Ename, ', ', Job_type, ', ', SupervisonENO, ', ', Hire_date, ', ', Dno, ', ', Commission, ', ', Salary) AS THE_OUTPUT
+FROM EMPLOYEE;
+
+
+5.Employee Name and Salary of all the employees earning more than $2850
+SOLUTION
+
+
+SELECT Ename, Salary
+FROM EMPLOYEE
+WHERE Salary > 2850;
