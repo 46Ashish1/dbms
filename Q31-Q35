@@ -1,0 +1,50 @@
+31.display the total number of supervisors without listing their names.
+SOLUTION
+
+SELECT COUNT(DISTINCT mgr) as num_supervisors
+FROM emp
+WHERE mgr IS NOT NULL;
+
+32.isplay the Department Name, Location Name, No. of Employees and the
+average salary for all employees in that department.
+SOLUTION
+
+SELECT d.department_name AS "Department Name",
+       d.location AS "Location Name",
+       COUNT(*) AS "No. of Employees",
+       AVG(e.salary) AS "Average Salary"
+FROM departments d
+JOIN employees e ON d.department_id = e.department_id
+GROUP BY d.department_name, d.location;
+
+33.display Name and Hire Date for all employees in the same dept. as Blake.
+SOLUTION
+
+SELECT e2.Ename, e2.Hiredate
+FROM emp e1, emp e2, dept d
+WHERE e1.Ename = 'Blake'
+AND e1.Deptno = d.Deptno
+AND e2.Deptno = d.Deptno
+AND e1.Empno <> e2.Empno;
+
+
+34.display the Employee No. And Name for all employees who earn more than the
+average salary.
+SOLUTION
+
+SELECT Empno, Ename
+FROM Emp
+WHERE Sal > (SELECT AVG(Sal) FROM Emp);
+
+35.display Employee Number and Name for all employees who work in a
+department with any employee whose name contains a ‘T’.
+SOLUTION
+
+SELECT e.empno, e.ename
+FROM emp e
+JOIN (
+    SELECT DISTINCT deptno
+    FROM emp
+    WHERE ename LIKE '%T%'
+) t_dept
+ON e.deptno = t_dept.deptno;
