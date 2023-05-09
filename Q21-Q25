@@ -1,0 +1,37 @@
+21. display Name, Hire Date and Day of the week on which the employee started.
+SOLUTION
+
+SELECT Ename AS 'Name', Hire_date AS 'Hire Date', DATE_FORMAT(Hire_date, '%W') AS 'Day of Week'
+FROM EMPLOYEE;
+
+22.display Name, Department Name and Department No for all the employees.
+SOLUTION
+
+SELECT e.Ename AS 'Name', d.Dname AS 'Department Name', d.Dno AS 'Department No'
+FROM EMPLOYEE e
+JOIN DEPARTMENT d ON e.Dno = d.Dno;
+
+23.display Unique Listing of all Jobs that are in Department number 30
+SOLUTION
+
+SELECT DISTINCT Job_type
+FROM EMPLOYEE
+WHERE Dno = 30;
+
+24.display Name, Dept Name of all employees who have an ‘A’ in their name.
+SOLUTION
+
+SELECT e.Ename, d.Dname
+FROM EMPLOYEE e
+INNER JOIN DEPARTMENT d
+ON e.Dno = d.Dno
+WHERE e.Ename LIKE '%A%';
+
+25.display Name, Job, Department No. And Department Name for all the
+employees working at the Dallas location.
+SOLUTION
+
+SELECT E.Ename AS Name, E.Job_type AS Job, E.Dno AS DeptNo, D.Dname AS DeptName
+FROM EMPLOYEE E
+JOIN DEPARTMENT D ON E.Dno = D.Dno
+WHERE D.Location = 'Dallas';
