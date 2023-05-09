@@ -1,0 +1,39 @@
+36.display the names and salaries of all employees who report to supervisor named‘King’
+SOLUTION
+
+SELECT e.ename, e.sal
+FROM emp e
+INNER JOIN emp s ON e.mgr = s.empno
+WHERE s.ename = 'King';
+
+37.display the department no, name and job for all employees in the Sales department
+SOLUTION
+
+SELECT d.deptno, d.dname, e.job
+FROM emp e
+INNER JOIN dept d ON e.deptno = d.deptno
+WHERE d.dname = 'SALES';
+
+38.names of employees along with their department name who have more than 20 years experience
+SOLUTION
+
+SELECT e.ename AS "Employee Name", d.dname AS "Department Name"
+FROM emp e
+JOIN dept d ON e.deptno = d.deptno
+WHERE (MONTHS_BETWEEN(sysdate, e.hiredate) / 12) >= 20;
+
+39.Display total number of departments at each location
+SOLUTION
+
+SELECT loc.location_id, loc.city, COUNT(*) AS num_departments
+FROM departments dept
+JOIN locations loc ON dept.location_id = loc.location_id
+GROUP BY loc.location_id, loc.city;
+
+40.department name in which at least 20 employees work in.
+SOLUTION
+
+SELECT d.dname AS "Department Name"
+FROM dept d JOIN emp e ON d.deptno = e.deptno
+GROUP BY d.dname
+HAVING COUNT(*) >= 20;
